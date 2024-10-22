@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import ImageClickFlow from "./components/ImageClickFlow";
+import MainScreen from "./components/MainScreen";
+import EnterScreen from "./components/EnterScreen";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+  const [isMainScreen, setIsMainScreen] = useState(false);
+  const [isEnterScreen, setIsEnterScreen] = useState(false);
+
+  const handleEnterClick = () => {
+    setIsEnterScreen(true);
+  };
+
+  if (isMainScreen) {
+    return <MainScreen />;
+  }
+
+  if (isEnterScreen) {
+    return <EnterScreen onEnter={() => setIsMainScreen(true)} />;
+  }
+
+  return <ImageClickFlow onEnter={handleEnterClick} />;
+};
 
 export default App;
