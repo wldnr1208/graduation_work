@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ImageClickFlow from "./components/ImageClickFlow";
 import MainScreen from "./components/MainScreen";
-import Layout from "./components/Layout"; // 공통 레이아웃 컴포넌트 임포트
+import Layout from "./components/layout/Layout";
 
 const App = () => {
   const [isMainScreen, setIsMainScreen] = useState(false);

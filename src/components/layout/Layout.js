@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import blackBarGif from "../assets/common/blackBarImage.gif"; // 검은 바 이미지 추가
+import blackBarGif from "../../assets/common/blackBarImage.gif"; // 검은 바 이미지 추가
 
 const Layout = ({ children }) => {
   return (
