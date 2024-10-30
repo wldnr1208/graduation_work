@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import blackBarGif from "../assets/common/blackBarImage.gif"; // 검은 바 이미지 추가
+import blackBarGif from "../../assets/common/blackBarImage.gif"; // 검은 바 이미지 추가
 
 const Layout = ({ children }) => {
   return (
@@ -24,13 +24,13 @@ const Container = styled.div`
 
 const ContentContainer = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 90%; /* 화면의 중앙 영역 */
+  justify-content: flex-start; /* 왼쪽 정렬 */
+  align-items: stretch;
   width: 100%;
 `;
 
+
 const BlackBar = styled.img`
   width: 100%;
-  height: 5%; /* 위아래 5%씩 차지 */
+  height: 40px;
 `;
