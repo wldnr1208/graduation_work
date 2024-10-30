@@ -13,6 +13,5 @@ const MainScreen = () => {
 export default MainScreen;
 const Container = styled.div`
   display: flex;
-  height: 90vh;
   background-color: #f0f0f0;
 `;

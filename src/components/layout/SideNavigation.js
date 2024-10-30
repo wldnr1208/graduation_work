@@ -16,13 +16,13 @@ const SideNavigation = () => {
   return (
     <NavContainer>
       <ButtonContainer>
-        <ButtonImage
+        <ReFreshButtonImage
           src={refreshSrc}
           alt="Refresh"
           onMouseEnter={() => setRefreshSrc(refreshIconHover)}
           onMouseLeave={() => setRefreshSrc(refreshIcon)}
         />
-        <ButtonImage
+        <PoButtonImage
           src={overviewSrc}
           alt="Project Overview"
           onMouseEnter={() => setOverviewSrc(projectOverviewIconHover)}
@@ -42,31 +42,54 @@ const SideNavigation = () => {
 export default SideNavigation;
 
 const NavContainer = styled.div`
-  width: 100%;
-  height: calc(100vh - 50px); /* 검은 네브바 높이 (50px)를 제외한 높이 */
+  width: 310px; /* 네비게이션 바의 고정 너비 */
+  height: calc(100vh - 80px);; /* 부모 컨테이너 높이 전부 차지 */
   background-image: url(${navImg}); /* 배경에 개 이미지 설정 */
-  background-size: cover; /* 컨테이너 크기에 맞게 이미지 조절 */
+  background-size: 310px 100%; /* 최소 너비 310px로 설정, 높이는 자동 조정 */
+  background-repeat: no-repeat; /* 필요에 따라 반복 설정 */
   background-position: center; /* 이미지 가운데 정렬 */
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 20px;
-  margin-left: 0; /* 왼쪽으로 완전히 붙이기 */
+  flex-shrink: 0; /* 사이드 네비게이션 너비가 줄어들지 않도록 설정 */
+  justify-content: flex-end;
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: auto; /* 네비게이션 바의 아래쪽에 위치 */
-  gap: 10px;
 `;
 
-const ButtonImage = styled.img`
-  width: 150px;
-  height: auto;
+const ReFreshButtonImage = styled.img`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 176px;
+  height: 46px;
+  margin-bottom: 60px;
+`;
+
+
+const PoButtonImage = styled.img`
+  width: 208px;
+  height: 70px;
+  margin-bottom: 20px; 
   cursor: pointer;
   transition: transform 0.2s;
+
+  &:hover {
+    transform: scale(1.05); /* 호버 시 확대 효과 */
+  }
+`;
+
+
+const ButtonImage = styled.img`
+  width: 208px;
+  height: 70px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  margin-bottom: 75px; 
 
   &:hover {
     transform: scale(1.05); /* 호버 시 확대 효과 */
