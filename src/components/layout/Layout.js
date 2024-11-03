@@ -29,8 +29,7 @@ const ContentContainer = styled.div`
   width: 100%;
 `;
 
-
 const BlackBar = styled.img`
   width: 100%;
-  height: 40px;
+  height: 52px;
 `;

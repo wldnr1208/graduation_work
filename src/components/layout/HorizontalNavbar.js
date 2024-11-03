@@ -25,39 +25,90 @@ const HorizontalNavbar = () => {
     return defaultSrc;
   };
 
-  const [aboutSrc, setAboutSrc] = useState(getImageSrc("/about", aboutIcon, aboutIconHover, aboutIconActive));
-  const [collectionSrc, setCollectionSrc] = useState(getImageSrc("/collection", collectionIcon, collectionIconHover, collectionIconActive));
-  const [auctionSrc, setAuctionSrc] = useState(getImageSrc("/auction", auctionIcon, auctionIconHover, auctionIconActive));
-  const [valueSrc, setValueSrc] = useState(getImageSrc("/value", valueIcon, valueIconHover, valueIconActive));
+  const [aboutSrc, setAboutSrc] = useState(
+    getImageSrc("/about", aboutIcon, aboutIconHover, aboutIconActive)
+  );
+  const [collectionSrc, setCollectionSrc] = useState(
+    getImageSrc(
+      "/collection",
+      collectionIcon,
+      collectionIconHover,
+      collectionIconActive
+    )
+  );
+  const [auctionSrc, setAuctionSrc] = useState(
+    getImageSrc("/auction", auctionIcon, auctionIconHover, auctionIconActive)
+  );
+  const [valueSrc, setValueSrc] = useState(
+    getImageSrc("/value", valueIcon, valueIconHover, valueIconActive)
+  );
 
   return (
     <NavContainer>
-      <ButtonImage
+      <AboutButtonImage
         src={aboutSrc}
         alt="About"
-        onMouseEnter={() => setAboutSrc(location.pathname === "/about" ? aboutIconActive : aboutIconHover)}
-        onMouseLeave={() => setAboutSrc(location.pathname === "/about" ? aboutIconActive : aboutIcon)}
+        onMouseEnter={() =>
+          setAboutSrc(
+            location.pathname === "/about" ? aboutIconActive : aboutIconHover
+          )
+        }
+        onMouseLeave={() =>
+          setAboutSrc(
+            location.pathname === "/about" ? aboutIconActive : aboutIcon
+          )
+        }
         onClick={() => navigate("/about")}
       />
-      <ButtonImage
+      <CollectionButtonImage
         src={collectionSrc}
         alt="Collection"
-        onMouseEnter={() => setCollectionSrc(location.pathname === "/collection" ? collectionIconActive : collectionIconHover)}
-        onMouseLeave={() => setCollectionSrc(location.pathname === "/collection" ? collectionIconActive : collectionIcon)}
+        onMouseEnter={() =>
+          setCollectionSrc(
+            location.pathname === "/collection"
+              ? collectionIconActive
+              : collectionIconHover
+          )
+        }
+        onMouseLeave={() =>
+          setCollectionSrc(
+            location.pathname === "/collection"
+              ? collectionIconActive
+              : collectionIcon
+          )
+        }
         onClick={() => navigate("/collection")}
       />
-      <ButtonImage
+      <AuctionButtonImage
         src={auctionSrc}
         alt="Join an Auction"
-        onMouseEnter={() => setAuctionSrc(location.pathname === "/auction" ? auctionIconActive : auctionIconHover)}
-        onMouseLeave={() => setAuctionSrc(location.pathname === "/auction" ? auctionIconActive : auctionIcon)}
+        onMouseEnter={() =>
+          setAuctionSrc(
+            location.pathname === "/auction"
+              ? auctionIconActive
+              : auctionIconHover
+          )
+        }
+        onMouseLeave={() =>
+          setAuctionSrc(
+            location.pathname === "/auction" ? auctionIconActive : auctionIcon
+          )
+        }
         onClick={() => navigate("/auction")}
       />
-      <ButtonImage
+      <ValueButtonImage
         src={valueSrc}
         alt="Value"
-        onMouseEnter={() => setValueSrc(location.pathname === "/value" ? valueIconActive : valueIconHover)}
-        onMouseLeave={() => setValueSrc(location.pathname === "/value" ? valueIconActive : valueIcon)}
+        onMouseEnter={() =>
+          setValueSrc(
+            location.pathname === "/value" ? valueIconActive : valueIconHover
+          )
+        }
+        onMouseLeave={() =>
+          setValueSrc(
+            location.pathname === "/value" ? valueIconActive : valueIcon
+          )
+        }
         onClick={() => navigate("/value")}
       />
     </NavContainer>
@@ -69,21 +120,37 @@ export default HorizontalNavbar;
 const NavContainer = styled.div`
   display: flex;
   align-items: center;
-  height: 60px;
+  height: 132px;
   width: 100%;
   background-color: #222;
   color: #fff;
-  padding: 0 20px;
+  padding-left: 40px;
 `;
 
-const ButtonImage = styled.img`
-  width: 120px;
-  height: auto;
+const AboutButtonImage = styled.img`
+  width: 163px;
+  height: 76px;
   cursor: pointer;
-  margin: 0 10px;
-  transition: transform 0.2s;
+  padding-left: 30px;
+`;
 
-  &:hover {
-    transform: scale(1.05); /* 호버 시 확대 효과 */
-  }
+const CollectionButtonImage = styled.img`
+  width: 222px;
+  height: 76px;
+  cursor: pointer;
+  padding-left: 30px;
+`;
+
+const AuctionButtonImage = styled.img`
+  width: 343px;
+  height: 76px;
+  cursor: pointer;
+  padding-left: 30px;
+`;
+
+const ValueButtonImage = styled.img`
+  width: 764px;
+  height: 76px;
+  cursor: pointer;
+  padding-left: 60px;
 `;
