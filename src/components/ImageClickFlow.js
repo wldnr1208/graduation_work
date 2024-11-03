@@ -53,7 +53,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 100vw; /* 뷰포트의 전체 너비를 사용 */
-  height: calc(100vh - 80px); /* 상하 40px을 제외한 높이 설정 */
+  height: calc(100vh - 104px); /* 상하 40px을 제외한 높이 설정 */
   background-image: ${({ $isGifPlaying }) =>
     $isGifPlaying ? `url(${enterImage})` : "none"}; /* Transient prop 사용 */
   background-size: cover;
