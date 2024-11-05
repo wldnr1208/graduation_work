@@ -15,6 +15,9 @@ import auctionIconActive from "../../assets/navigation/horizontalNavigation/auct
 import valueIcon from "../../assets/navigation/horizontalNavigation/5value_1.png";
 import valueIconHover from "../../assets/navigation/horizontalNavigation/5value_h.png";
 import valueIconActive from "../../assets/navigation/horizontalNavigation/5value_2.png";
+import flameIcon from "../../assets/navigation/horizontalNavigation/5fame_1.png";
+import flameHover from "../../assets/navigation/horizontalNavigation/5fame_2.png";
+import flameActive from "../../assets/navigation/horizontalNavigation/5fame_h.png";
 
 const HorizontalNavbar = () => {
   const location = useLocation();
@@ -41,6 +44,10 @@ const HorizontalNavbar = () => {
   );
   const [valueSrc, setValueSrc] = useState(
     getImageSrc("/value", valueIcon, valueIconHover, valueIconActive)
+  );
+
+  const [flmeSrc, setFlmeSrc] = useState(
+    getImageSrc("/fame", flameIcon, flameHover, flameActive)
   );
 
   return (
@@ -111,6 +118,17 @@ const HorizontalNavbar = () => {
         }
         onClick={() => navigate("/value")}
       />
+      <FlameButtonImage
+        src={flmeSrc}
+        alt="Value"
+        onMouseEnter={() =>
+          setFlmeSrc(location.pathname === "/value" ? flameActive : flameHover)
+        }
+        onMouseLeave={() =>
+          setFlmeSrc(location.pathname === "/value" ? flameActive : flameIcon)
+        }
+        onClick={() => navigate("/value")}
+      />
     </NavContainer>
   );
 };
@@ -150,6 +168,13 @@ const AuctionButtonImage = styled.img`
 
 const ValueButtonImage = styled.img`
   width: 764px;
+  height: 76px;
+  cursor: pointer;
+  padding-left: 60px;
+`;
+
+const FlameButtonImage = styled.img`
+  width: 163px;
   height: 76px;
   cursor: pointer;
   padding-left: 60px;

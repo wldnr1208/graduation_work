@@ -1,15 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
-const About = () => {
+const fame = () => {
   return (
     <Container>
-      <div>About</div>
+      <div>fame</div>
     </Container>
   );
 };
 
-export default About;
+export default fame;
 const Container = styled.div`
   display: flex;
   width: 100%;
