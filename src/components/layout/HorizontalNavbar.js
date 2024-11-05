@@ -23,111 +23,50 @@ const HorizontalNavbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const getImageSrc = (page, defaultSrc, hoverSrc, activeSrc) => {
-    if (location.pathname === page) return activeSrc;
-    return defaultSrc;
-  };
+  const isActive = (page) => location.pathname === page;
 
-  const [aboutSrc, setAboutSrc] = useState(
-    getImageSrc("/about", aboutIcon, aboutIconHover, aboutIconActive)
-  );
-  const [collectionSrc, setCollectionSrc] = useState(
-    getImageSrc(
-      "/collection",
-      collectionIcon,
-      collectionIconHover,
-      collectionIconActive
-    )
-  );
-  const [auctionSrc, setAuctionSrc] = useState(
-    getImageSrc("/auction", auctionIcon, auctionIconHover, auctionIconActive)
-  );
-  const [valueSrc, setValueSrc] = useState(
-    getImageSrc("/value", valueIcon, valueIconHover, valueIconActive)
-  );
-
-  const [flmeSrc, setFlmeSrc] = useState(
-    getImageSrc("/fame", flameIcon, flameHover, flameActive)
-  );
+  const [aboutSrc, setAboutSrc] = useState(aboutIcon);
+  const [collectionSrc, setCollectionSrc] = useState(collectionIcon);
+  const [auctionSrc, setAuctionSrc] = useState(auctionIcon);
+  const [valueSrc, setValueSrc] = useState(valueIcon);
+  const [flameSrc, setFlameSrc] = useState(flameIcon);
 
   return (
     <NavContainer>
       <AboutButtonImage
-        src={aboutSrc}
+        src={isActive("/about") ? aboutIconActive : aboutSrc}
         alt="About"
-        onMouseEnter={() =>
-          setAboutSrc(
-            location.pathname === "/about" ? aboutIconActive : aboutIconHover
-          )
-        }
-        onMouseLeave={() =>
-          setAboutSrc(
-            location.pathname === "/about" ? aboutIconActive : aboutIcon
-          )
-        }
+        onMouseEnter={() => setAboutSrc(aboutIconHover)}
+        onMouseLeave={() => setAboutSrc(aboutIcon)}
         onClick={() => navigate("/about")}
       />
       <CollectionButtonImage
-        src={collectionSrc}
+        src={isActive("/collection") ? collectionIconActive : collectionSrc}
         alt="Collection"
-        onMouseEnter={() =>
-          setCollectionSrc(
-            location.pathname === "/collection"
-              ? collectionIconActive
-              : collectionIconHover
-          )
-        }
-        onMouseLeave={() =>
-          setCollectionSrc(
-            location.pathname === "/collection"
-              ? collectionIconActive
-              : collectionIcon
-          )
-        }
+        onMouseEnter={() => setCollectionSrc(collectionIconHover)}
+        onMouseLeave={() => setCollectionSrc(collectionIcon)}
         onClick={() => navigate("/collection")}
       />
       <AuctionButtonImage
-        src={auctionSrc}
+        src={isActive("/auction") ? auctionIconActive : auctionSrc}
         alt="Join an Auction"
-        onMouseEnter={() =>
-          setAuctionSrc(
-            location.pathname === "/auction"
-              ? auctionIconActive
-              : auctionIconHover
-          )
-        }
-        onMouseLeave={() =>
-          setAuctionSrc(
-            location.pathname === "/auction" ? auctionIconActive : auctionIcon
-          )
-        }
+        onMouseEnter={() => setAuctionSrc(auctionIconHover)}
+        onMouseLeave={() => setAuctionSrc(auctionIcon)}
         onClick={() => navigate("/auction")}
       />
       <ValueButtonImage
-        src={valueSrc}
+        src={isActive("/value") ? valueIconActive : valueSrc}
         alt="Value"
-        onMouseEnter={() =>
-          setValueSrc(
-            location.pathname === "/value" ? valueIconActive : valueIconHover
-          )
-        }
-        onMouseLeave={() =>
-          setValueSrc(
-            location.pathname === "/value" ? valueIconActive : valueIcon
-          )
-        }
+        onMouseEnter={() => setValueSrc(valueIconHover)}
+        onMouseLeave={() => setValueSrc(valueIcon)}
         onClick={() => navigate("/value")}
       />
       <FlameButtonImage
-        src={flmeSrc}
-        alt="Value"
-        onMouseEnter={() =>
-          setFlmeSrc(location.pathname === "/value" ? flameActive : flameHover)
-        }
-        onMouseLeave={() =>
-          setFlmeSrc(location.pathname === "/value" ? flameActive : flameIcon)
-        }
-        onClick={() => navigate("/value")}
+        src={isActive("/fame") ? flameActive : flameSrc}
+        alt="Fame"
+        onMouseEnter={() => setFlameSrc(flameHover)}
+        onMouseLeave={() => setFlameSrc(flameIcon)}
+        onClick={() => navigate("/fame")}
       />
     </NavContainer>
   );

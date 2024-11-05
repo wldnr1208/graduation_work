@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import navImg from "../../assets/navigation/sideNavigation/nav_vertical.png";
 import refreshIcon from "../../assets/navigation/sideNavigation/randing.png";
@@ -9,9 +10,17 @@ import projectMethodIcon from "../../assets/navigation/sideNavigation/projectmet
 import projectMethodIconHover from "../../assets/navigation/sideNavigation/projectmethod_h.png";
 
 const SideNavigation = () => {
+  const location = useLocation(); // Get the current location
   const [refreshSrc, setRefreshSrc] = useState(refreshIcon);
   const [overviewSrc, setOverviewSrc] = useState(projectOverviewIcon);
   const [methodSrc, setMethodSrc] = useState(projectMethodIcon);
+
+  // Reset hover images on location (page) change
+  useEffect(() => {
+    setRefreshSrc(refreshIcon);
+    setOverviewSrc(projectOverviewIcon);
+    setMethodSrc(projectMethodIcon);
+  }, [location]);
 
   return (
     <NavContainer>
@@ -42,16 +51,16 @@ const SideNavigation = () => {
 export default SideNavigation;
 
 const NavContainer = styled.div`
-  width: 412px; /* 네비게이션 바의 고정 너비 */
-  height: calc(100vh - 104px); /* 부모 컨테이너 높이 전부 차지 */
-  background-image: url(${navImg}); /* 배경에 개 이미지 설정 */
-  background-size: 412px 100%; /* 최소 너비 310px로 설정, 높이는 자동 조정 */
-  background-repeat: no-repeat; /* 필요에 따라 반복 설정 */
-  background-position: center; /* 이미지 가운데 정렬 */
+  width: 412px;
+  height: calc(100vh - 104px);
+  background-image: url(${navImg});
+  background-size: 412px 100%;
+  background-repeat: no-repeat;
+  background-position: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex-shrink: 0; /* 사이드 네비게이션 너비가 줄어들지 않도록 설정 */
+  flex-shrink: 0;
 `;
 
 const ButtonContainer = styled.div`
@@ -62,8 +71,6 @@ const ButtonContainer = styled.div`
 
 const ReFreshButtonImage = styled.img`
   display: flex;
-  flex-direction: column;
-  align-items: center;
   width: 235px;
   height: 62px;
   margin-top: 875px;

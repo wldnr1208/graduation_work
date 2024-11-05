@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const fame = () => {
+const Fame = () => {
   return (
     <Container>
       <div>fame</div>
@@ -9,7 +9,7 @@ const fame = () => {
   );
 };
 
-export default fame;
+export default Fame;
 const Container = styled.div`
   display: flex;
   width: 100%;
