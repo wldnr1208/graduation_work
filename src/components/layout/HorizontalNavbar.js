@@ -16,8 +16,8 @@ import valueIcon from "../../assets/navigation/horizontalNavigation/5value_1.png
 import valueIconHover from "../../assets/navigation/horizontalNavigation/5value_h.png";
 import valueIconActive from "../../assets/navigation/horizontalNavigation/5value_2.png";
 import flameIcon from "../../assets/navigation/horizontalNavigation/5fame_1.png";
-import flameHover from "../../assets/navigation/horizontalNavigation/5fame_2.png";
-import flameActive from "../../assets/navigation/horizontalNavigation/5fame_h.png";
+import flameHover from "../../assets/navigation/horizontalNavigation/5fame_h.png";
+import flameActive from "../../assets/navigation/horizontalNavigation/5fame_2.png";
 
 const HorizontalNavbar = () => {
   const location = useLocation();
