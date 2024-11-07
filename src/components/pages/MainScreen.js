@@ -1,32 +1,51 @@
 import React from "react";
 import styled from "styled-components";
-import SideNavigation from "../layout/SideNavigation.js";
-import HorizontalNavbar from "../layout/HorizontalNavbar.js";
-import { Route, Routes } from "react-router-dom";
+import SideNavigation from "../layout/SideNavigation";
+import HorizontalNavbar from "../layout/HorizontalNavbar";
+import { Navigate, Route, Routes } from "react-router-dom";
 import About from "./About";
 import Auction from "./Auction";
 import Collection from "./Collection";
 import Value from "./Value";
+import Fame from "./Fame";
 
 const MainScreen = () => {
   return (
     <Container>
       <SideNavigation />
-      <HorizontalNavbar/>
-      <Routes>
-        <Route path="/about" element={<About />} />
-        <Route path="/collection" element={<Collection />} />
-        <Route path="/auction" element={<Auction />} />
-        <Route path="/value" element={<Value />} />
-        {/* 필요한 다른 경로도 추가할 수 있습니다 */}
-      </Routes>
+      <Content>
+        <HorizontalNavbar />
+        <PageContent>
+          <Routes>
+            <Route path="/" element={<Navigate to="/about" replace />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/collection" element={<Collection />} />
+            <Route path="/auction" element={<Auction />} />
+            <Route path="/value" element={<Value />} />
+            <Route path="/fame" element={<Fame />} />
+            {/* 다른 경로 추가 */}
+          </Routes>
+        </PageContent>
+      </Content>
     </Container>
   );
 };
 
 export default MainScreen;
+
 const Container = styled.div`
   display: flex;
-   width: 100%;
+  width: 100%;
+  height: 100%;
+`;
+
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   background-color: #f0f0f0;
+`;
+
+const PageContent = styled.div`
+  flex: 1;
 `;

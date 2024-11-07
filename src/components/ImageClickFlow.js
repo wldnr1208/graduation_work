@@ -3,6 +3,7 @@ import styled from "styled-components";
 import introImage from "../assets/intro/introImage.png";
 import gifAnimation from "../assets/intro/gifAnimation.gif";
 import enterImage from "../assets/intro/enterImage.png";
+// import background from "../assets/intro/background.png";
 
 const ImageClickFlow = ({ onEnter }) => {
   const [isGifPlaying, setIsGifPlaying] = useState(false);
@@ -11,9 +12,9 @@ const ImageClickFlow = ({ onEnter }) => {
   const handleImageClick = () => {
     setIsGifPlaying(true);
     setTimeout(() => {
-      setIsGifPlaying(false);
+      setIsGifPlaying(false); // GIF가 끝나고 introImage가 바로 나타나도록 설정
       setShowEnterScreen(true);
-    }, 5000); // GIF 재생 시간에 맞게 조절
+    }, 4000); // GIF 재생 시간에 맞게 조절
   };
 
   useEffect(() => {
@@ -52,11 +53,11 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100vw; /* 뷰포트의 전체 너비를 사용 */
-  height: calc(100vh - 104px); /* 상하 40px을 제외한 높이 설정 */
+  width: 100vw;
+  height: calc(100vh - 104px);
   background-image: ${({ $isGifPlaying }) =>
-    $isGifPlaying ? `url(${enterImage})` : "none"}; /* Transient prop 사용 */
-  background-size: cover;
+    $isGifPlaying ? `url(${enterImage})` : "none"};
+  background-size: 100% calc(100vh - 104px);
   background-position: center;
   background-repeat: no-repeat;
 `;

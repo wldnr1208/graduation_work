@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import navImg from "../../assets/navigation/sideNavigation/nav_vertical.png";
 import refreshIcon from "../../assets/navigation/sideNavigation/randing.png";
@@ -7,11 +8,40 @@ import projectOverviewIcon from "../../assets/navigation/sideNavigation/projecto
 import projectOverviewIconHover from "../../assets/navigation/sideNavigation/projectoverview_h.png";
 import projectMethodIcon from "../../assets/navigation/sideNavigation/projectmethod.png";
 import projectMethodIconHover from "../../assets/navigation/sideNavigation/projectmethod_h.png";
+import reason from "../../assets/common/how.png";
+import how from "../../assets/common/reason.png";
 
 const SideNavigation = () => {
+  const location = useLocation();
   const [refreshSrc, setRefreshSrc] = useState(refreshIcon);
   const [overviewSrc, setOverviewSrc] = useState(projectOverviewIcon);
   const [methodSrc, setMethodSrc] = useState(projectMethodIcon);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalImageSrc, setModalImageSrc] = useState(null);
+
+  useEffect(() => {
+    setRefreshSrc(refreshIcon);
+    setOverviewSrc(projectOverviewIcon);
+    setMethodSrc(projectMethodIcon);
+  }, [location]);
+
+  const handleRefreshClick = () => {
+    window.location.reload();
+  };
+
+  const handleOverviewClick = () => {
+    setModalImageSrc(how);
+    setIsModalOpen(true);
+  };
+
+  const handleMethodClick = () => {
+    setModalImageSrc(reason);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <NavContainer>
@@ -21,20 +51,32 @@ const SideNavigation = () => {
           alt="Refresh"
           onMouseEnter={() => setRefreshSrc(refreshIconHover)}
           onMouseLeave={() => setRefreshSrc(refreshIcon)}
+          onClick={handleRefreshClick}
         />
         <PoButtonImage
           src={overviewSrc}
           alt="Project Overview"
           onMouseEnter={() => setOverviewSrc(projectOverviewIconHover)}
           onMouseLeave={() => setOverviewSrc(projectOverviewIcon)}
+          onClick={handleOverviewClick}
         />
         <ButtonImage
           src={methodSrc}
           alt="Project Method"
           onMouseEnter={() => setMethodSrc(projectMethodIconHover)}
           onMouseLeave={() => setMethodSrc(projectMethodIcon)}
+          onClick={handleMethodClick}
         />
       </ButtonContainer>
+
+      {isModalOpen && (
+        <ModalOverlay onClick={closeModal}>
+          <ModalContent onClick={(e) => e.stopPropagation()}>
+            <CloseButton onClick={closeModal}>X</CloseButton>
+            <img src={modalImageSrc} alt="Modal Content" />
+          </ModalContent>
+        </ModalOverlay>
+      )}
     </NavContainer>
   );
 };
@@ -42,16 +84,16 @@ const SideNavigation = () => {
 export default SideNavigation;
 
 const NavContainer = styled.div`
-  width: 412px; /* 네비게이션 바의 고정 너비 */
-  height: calc(100vh - 104px); /* 부모 컨테이너 높이 전부 차지 */
-  background-image: url(${navImg}); /* 배경에 개 이미지 설정 */
-  background-size: 412px 100%; /* 최소 너비 310px로 설정, 높이는 자동 조정 */
-  background-repeat: no-repeat; /* 필요에 따라 반복 설정 */
-  background-position: center; /* 이미지 가운데 정렬 */
+  width: 412px;
+  height: calc(100vh - 104px);
+  background-image: url(${navImg});
+  background-size: 412px 100%;
+  background-repeat: no-repeat;
+  background-position: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex-shrink: 0; /* 사이드 네비게이션 너비가 줄어들지 않도록 설정 */
+  flex-shrink: 0;
 `;
 
 const ButtonContainer = styled.div`
@@ -62,8 +104,6 @@ const ButtonContainer = styled.div`
 
 const ReFreshButtonImage = styled.img`
   display: flex;
-  flex-direction: column;
-  align-items: center;
   width: 235px;
   height: 62px;
   margin-top: 875px;
@@ -82,4 +122,36 @@ const ButtonImage = styled.img`
   height: 93px;
   cursor: pointer;
   margin-bottom: 75px;
+`;
+
+const ModalOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+`;
+
+const ModalContent = styled.div`
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 90%;
+  max-height: 90%;
+  position: relative;
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
 `;
