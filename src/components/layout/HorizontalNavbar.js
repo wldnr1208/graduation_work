@@ -89,6 +89,8 @@ const NavContainer = styled.div`
   background-image: url(${square_background});
   background-size: cover;
   background-repeat: no-repeat;
+  border-bottom: 5px solid black;
+  border-top: 5px solid black;
 `;
 
 const AboutButtonImage = styled.img`

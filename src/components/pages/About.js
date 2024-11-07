@@ -44,4 +44,5 @@ const AboutImage = styled.img`
   height: 1300px; /* 이미지의 높이 자동으로 설정 */
   padding-top: 100px;
   object-fit: contain; /* 이미지 비율 유지 */
+  margin-bottom: 60px;
 `;
