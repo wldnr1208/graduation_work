@@ -94,6 +94,9 @@ const NavContainer = styled.div`
   flex-direction: column;
   align-items: center;
   flex-shrink: 0;
+  border-bottom: 5px solid black;
+  border-top: 5px solid black;
+  border-right: 5px solid black;
 `;
 
 const ButtonContainer = styled.div`
