@@ -8,19 +8,40 @@ import projectOverviewIcon from "../../assets/navigation/sideNavigation/projecto
 import projectOverviewIconHover from "../../assets/navigation/sideNavigation/projectoverview_h.png";
 import projectMethodIcon from "../../assets/navigation/sideNavigation/projectmethod.png";
 import projectMethodIconHover from "../../assets/navigation/sideNavigation/projectmethod_h.png";
+import reason from "../../assets/common/how.png";
+import how from "../../assets/common/reason.png";
 
 const SideNavigation = () => {
-  const location = useLocation(); // Get the current location
+  const location = useLocation();
   const [refreshSrc, setRefreshSrc] = useState(refreshIcon);
   const [overviewSrc, setOverviewSrc] = useState(projectOverviewIcon);
   const [methodSrc, setMethodSrc] = useState(projectMethodIcon);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalImageSrc, setModalImageSrc] = useState(null);
 
-  // Reset hover images on location (page) change
   useEffect(() => {
     setRefreshSrc(refreshIcon);
     setOverviewSrc(projectOverviewIcon);
     setMethodSrc(projectMethodIcon);
   }, [location]);
+
+  const handleRefreshClick = () => {
+    window.location.reload();
+  };
+
+  const handleOverviewClick = () => {
+    setModalImageSrc(how);
+    setIsModalOpen(true);
+  };
+
+  const handleMethodClick = () => {
+    setModalImageSrc(reason);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <NavContainer>
@@ -30,20 +51,32 @@ const SideNavigation = () => {
           alt="Refresh"
           onMouseEnter={() => setRefreshSrc(refreshIconHover)}
           onMouseLeave={() => setRefreshSrc(refreshIcon)}
+          onClick={handleRefreshClick}
         />
         <PoButtonImage
           src={overviewSrc}
           alt="Project Overview"
           onMouseEnter={() => setOverviewSrc(projectOverviewIconHover)}
           onMouseLeave={() => setOverviewSrc(projectOverviewIcon)}
+          onClick={handleOverviewClick}
         />
         <ButtonImage
           src={methodSrc}
           alt="Project Method"
           onMouseEnter={() => setMethodSrc(projectMethodIconHover)}
           onMouseLeave={() => setMethodSrc(projectMethodIcon)}
+          onClick={handleMethodClick}
         />
       </ButtonContainer>
+
+      {isModalOpen && (
+        <ModalOverlay onClick={closeModal}>
+          <ModalContent onClick={(e) => e.stopPropagation()}>
+            <CloseButton onClick={closeModal}>X</CloseButton>
+            <img src={modalImageSrc} alt="Modal Content" />
+          </ModalContent>
+        </ModalOverlay>
+      )}
     </NavContainer>
   );
 };
@@ -89,4 +122,36 @@ const ButtonImage = styled.img`
   height: 93px;
   cursor: pointer;
   margin-bottom: 75px;
+`;
+
+const ModalOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+`;
+
+const ModalContent = styled.div`
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 90%;
+  max-height: 90%;
+  position: relative;
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
 `;

@@ -37,7 +37,7 @@ const Container = styled.div`
   max-height: 1204px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: left;
   flex-shrink: 0;
 `;
 
