@@ -1,3 +1,4 @@
+// src/components/pages/MainScreen.js
 import React from "react";
 import styled from "styled-components";
 import SideNavigation from "../layout/SideNavigation";
@@ -8,6 +9,7 @@ import Auction from "./Auction";
 import Collection from "./Collection";
 import Value from "./Value";
 import Fame from "./Fame";
+import CardDetail from "./CardDetail"; // 추가
 
 const MainScreen = () => {
   return (
@@ -23,7 +25,8 @@ const MainScreen = () => {
             <Route path="/auction" element={<Auction />} />
             <Route path="/value" element={<Value />} />
             <Route path="/fame" element={<Fame />} />
-            {/* 다른 경로 추가 */}
+            <Route path="/card/:cardId" element={<CardDetail />} />{" "}
+            {/* 상세 페이지 라우트 추가 */}
           </Routes>
         </PageContent>
       </Content>
