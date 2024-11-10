@@ -1,5 +1,7 @@
+// src/components/pages/Auction.js
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import backgroundImg from "../../assets/Action/Join_an_Auction_background.png";
 import cardImg1 from "../../assets/Action/nugget.png";
 import cardImg2 from "../../assets/Action/virgin.png";
@@ -13,16 +15,47 @@ import hoverCard4 from "../../assets/Action/life_h.png";
 import hoverCard5 from "../../assets/Action/tissue_h.png";
 
 const Auction = () => {
+  const navigate = useNavigate();
+
+  const handleCardClick = (cardId) => {
+    navigate(`/card/${cardId}`); // 클릭 시 카드 ID를 사용해 상세 페이지로 이동
+  };
+
   return (
     <Container>
       <ScrollableImageContainer>
         <BackgroundImage src={backgroundImg} alt="Background" />
         <CardGrid>
-          <Card src={cardImg1} hoverSrc={hoverCard1} alt="Card 1" />
-          <Card src={cardImg2} hoverSrc={hoverCard2} alt="Card 2" />
-          <Card src={cardImg3} hoverSrc={hoverCard3} alt="Card 3" />
-          <Card src={cardImg4} hoverSrc={hoverCard4} alt="Card 4" />
-          <Card src={cardImg5} hoverSrc={hoverCard5} alt="Card 5" />
+          <Card
+            src={cardImg1}
+            hoverSrc={hoverCard1}
+            alt="Card 1"
+            onClick={() => handleCardClick("cardId1")}
+          />
+          <Card
+            src={cardImg2}
+            hoverSrc={hoverCard2}
+            alt="Card 2"
+            onClick={() => handleCardClick("cardId2")}
+          />
+          <Card
+            src={cardImg3}
+            hoverSrc={hoverCard3}
+            alt="Card 3"
+            onClick={() => handleCardClick("cardId3")}
+          />
+          <Card
+            src={cardImg4}
+            hoverSrc={hoverCard4}
+            alt="Card 4"
+            onClick={() => handleCardClick("cardId4")}
+          />
+          <Card
+            src={cardImg5}
+            hoverSrc={hoverCard5}
+            alt="Card 5"
+            onClick={() => handleCardClick("cardId5")}
+          />
         </CardGrid>
       </ScrollableImageContainer>
     </Container>
@@ -80,7 +113,8 @@ const Card = styled.img.attrs((props) => ({
   height: 660px;
   object-fit: cover;
   transition: transform 0.3s;
+  cursor: pointer;
   &:hover {
-    transform: scale(1.05); /* 호버 시 카드 확대 효과 */
+    transform: scale(1.05);
   }
 `;
