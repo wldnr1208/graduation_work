@@ -16,6 +16,7 @@ import detailImg2 from "../../assets/ActionDetail/natali.png";
 import detailImg3 from "../../assets/ActionDetail/cadibi.png";
 import detailImg4 from "../../assets/ActionDetail/ian.png";
 import detailImg5 from "../../assets/ActionDetail/tissue.png";
+import auctionButtonImg from "../../assets/ActionDetail/auction_button.png";
 
 const CardDetail = () => {
   const { cardId } = useParams(); // useParams로 cardId 가져오기
@@ -91,6 +92,7 @@ const CardDetail = () => {
       },
     });
   };
+  const sortedBids = bids.slice().sort((a, b) => b.amount - a.amount);
 
   return (
     <Container>
@@ -100,26 +102,38 @@ const CardDetail = () => {
           <TitleImage src={imageMapping[cardId].titleImage} alt="Title" />
           <DetailImage src={imageMapping[cardId].detailImage} alt="Detail" />
         </Contain>
-      )}{" "}
+      )}
       <ScrollableImageContainer>
         <Form onSubmit={handleBidSubmit}>
-          <Input
-            type="text"
-            value={nickname}
-            onChange={(e) => setNickname(e.target.value)}
-            placeholder="닉네임"
-            required
+          <BidsContainer>
+            <UserContain>
+              <Name>입찰자 이름</Name>
+              <NameInput
+                type="text"
+                value={nickname}
+                onChange={(e) => setNickname(e.target.value)}
+                placeholder="닉네임"
+                required
+              />
+            </UserContain>
+            <BidContainer>
+              <Name>입찰가를 입력하세요</Name>
+              <Input
+                type="number"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                placeholder="입찰 금액"
+                required
+              />
+            </BidContainer>
+          </BidsContainer>
+          <ButtonImg
+            src={auctionButtonImg}
+            alt="입찰하기"
+            onClick={handleBidSubmit}
+            style={{ cursor: "pointer" }}
+            disabled={addBidMutation.isLoading}
           />
-          <Input
-            type="number"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            placeholder="입찰 금액"
-            required
-          />
-          <Button type="submit" disabled={addBidMutation.isLoading}>
-            입찰하기
-          </Button>
         </Form>
         {addBidMutation.isError && (
           <ErrorText>오류가 발생했습니다. 다시 시도해주세요.</ErrorText>
@@ -127,13 +141,36 @@ const CardDetail = () => {
         {addBidMutation.isSuccess && (
           <SuccessText>입찰이 성공적으로 등록되었습니다!</SuccessText>
         )}
-        <BidList>
-          {bids.map((bid, index) => (
-            <BidItem key={index}>
-              <strong>{bid.bidder}</strong>: {bid.amount}원
-            </BidItem>
-          ))}
-        </BidList>{" "}
+        <BidderTitle>입찰자 리스트</BidderTitle>
+        <ListContain>
+          <WhiteBackground>
+            <HeaderRow>
+              <HeaderTitle>입찰자</HeaderTitle>
+              <HeaderTitle>입찰가</HeaderTitle>
+            </HeaderRow>
+            <CardGrid>
+              {sortedBids.length === 0 ? (
+                <EmptyMessage>아직 입찰 내역이 없습니다.</EmptyMessage>
+              ) : (
+                sortedBids.map((bid, index) => {
+                  const formattedAmount = `${
+                    bid?.amount?.toLocaleString() || 0
+                  } ₩`;
+                  return (
+                    <BidCard key={index} rank={index}>
+                      <CardContent>
+                        <BidderName rank={index}>
+                          {bid?.bidder || "알 수 없음"}
+                        </BidderName>
+                        <BidAmount rank={index}>{formattedAmount}</BidAmount>
+                      </CardContent>
+                    </BidCard>
+                  );
+                })
+              )}
+            </CardGrid>
+          </WhiteBackground>
+        </ListContain>
       </ScrollableImageContainer>
     </Container>
   );
@@ -141,25 +178,81 @@ const CardDetail = () => {
 
 export default CardDetail;
 
+const Name = styled.div`
+  width: 410px;
+  height: 41.563px;
+  color: #000;
+  font-size: 42px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 92.7%; /* 38.934px */
+  letter-spacing: -2.52px;
+  text-transform: uppercase;
+  padding-bottom: 27px;
+`;
+
+const BidderTitle = styled.div`
+  width: 410px;
+  height: 41.563px;
+  color: #000;
+  font-size: 42px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 92.7%; /* 38.934px */
+  letter-spacing: -2.52px;
+  text-transform: uppercase;
+  padding-bottom: 37px;
+`;
+
+const ListContain = styled.div`
+  display: flex;
+  width: 1125px;
+  height: 786.67;
+  text-align: center;
+  flex-direction: column;
+  border-radius: 13.333px;
+  border: 4px solid #000;
+`;
+const UserContain = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+const BidContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-left: 40px;
+`;
+
+const BidsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 37px;
+  width: 1071px;
+  justify-content: space-between;
+`;
+
 const Contain = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 40px;
+  padding-left: 80px;
+  padding-top: 62px;
 `;
 
 const Container = styled.div`
-  width: 100%; /* 네비게이션 바의 고정 너비 */
+  width: 2148px; /* 네비게이션 바의 고정 너비 */
   height: 1204px; /* 부모 컨테이너 높이 전부 차지 */
   background-image: url(${backgroundImg}); /* 배경 이미지 설정 */
   background-size: 100%;
   background-repeat: no-repeat;
-  background-position: center;
   object-fit: contain;
   display: flex;
   flex-shrink: 0;
 `;
 const ScrollableImageContainer = styled.div`
-  max-height: 100vh; /* 이미지가 부모 높이를 넘어갈 때 세로 스크롤 활성화 */
+  padding-top: 225px;
+  padding-left: 70px;
+  width: 100%;
+  max-height: 1795px; /* 이미지가 부모 높이를 넘어갈 때 세로 스크롤 활성화 */
   overflow-y: scroll; /* 세로 스크롤 활성화 */
   -ms-overflow-style: none; /* Internet Explorer와 Edge에서 스크롤바 숨기기 */
   scrollbar-width: none; /* Firefox에서 스크롤바 숨기기 */
@@ -170,51 +263,139 @@ const ScrollableImageContainer = styled.div`
 
 const TitleImage = styled.img`
   width: auto;
-  height: 80px;
-  margin-bottom: 40px;
+  height: 77px;
+  margin-bottom: 70px;
 `;
 
 const DetailImage = styled.img`
-  width: 505px;
-  height: 505px;
+  width: 673px;
+  height: 673px;
 `;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 10px;
 `;
 
 const Input = styled.input`
-  padding: 8px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  width: 605px;
+  padding: 0 15px; /* 좌우 padding 설정 */
+  border-radius: 12px;
+  border: 4px solid #000;
+  background: #fff;
+  height: 80px;
+  font-size: 32px; /* 일반 텍스트 크기 */
+
+  &::placeholder {
+    color: #bcbcbc;
+    font-size: 32px; /* placeholder 글자 크기 */
+    font-weight: 400;
+    line-height: 80px; /* input 높이에 맞춰 placeholder 텍스트 정렬 */
+  }
 `;
 
-const Button = styled.button`
-  padding: 10px;
-  font-size: 16px;
+const NameInput = styled.input`
+  width: 410px;
+  padding: 0 15px; /* 좌우 padding 설정 */
+  border-radius: 12px;
+  border: 4px solid #000;
+  background: #fff;
+  height: 80px;
+  font-size: 32px; /* 일반 텍스트 크기 */
+
+  &::placeholder {
+    color: #bcbcbc;
+    font-size: 32px; /* placeholder 글자 크기 */
+    font-weight: 400;
+    line-height: 80px; /* input 높이에 맞춰 placeholder 텍스트 정렬 */
+  }
+`;
+
+const ButtonImg = styled.img`
+  width: 1170px;
+  height: 135px;
   color: white;
-  background-color: #007bff;
   border: none;
+  margin-left: -20px;
   border-radius: 4px;
   cursor: pointer;
+  margin-bottom: 55px;
 
   &:disabled {
     background-color: #ccc;
   }
 `;
 
-const BidList = styled.ul`
-  margin-top: 20px;
-  list-style-type: none;
-  padding: 0;
+const WhiteBackground = styled.div`
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
-const BidItem = styled.li`
-  font-size: 16px;
-  margin-bottom: 8px;
+const HeaderRow = styled.div`
+  display: flex;
+  justify-content: space-around;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  margin-bottom: 24px;
+  border-bottom: 2px solid black;
+`;
+
+const HeaderTitle = styled.div`
+  height: 88px;
+  font-size: 32px;
+  font-weight: bold;
+  color: #000000;
+  display: flex;
+  text-align: left;
+  align-items: center;
+`;
+
+const CardGrid = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const BidCard = styled.div``;
+
+const CardContent = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-bottom: 35px;
+`;
+
+const BidderName = styled.div`
+  width: 500px;
+  font-weight: bold;
+  font-size: 32px;
+  ${({ rank }) => {
+    if (rank === 0)
+      return "color: #F00; text-align: center; font-size: 40px; font-style: normal; font-weight: bold;";
+    if (rank === 1) return "font-size: 37px; color: #3B82F6;";
+    if (rank === 2) return "font-size: 34px; color: #22C55E;";
+    return "font-size: 32px; color: #000000;";
+  }}
+`;
+
+const BidAmount = styled.div`
+  width: 500px;
+  font-weight: bold;
+  font-size: 32px;
+  ${({ rank }) => {
+    if (rank === 0)
+      return "color: #F00; text-align: center; font-size: 40px; font-style: normal; font-weight: bold;";
+    if (rank === 1) return "font-size: 37px; color: #3B82F6;";
+    if (rank === 2) return "font-size: 34px; color: #22C55E;";
+    return "font-size: 32px; color: #000000;";
+  }}
+`;
+
+const EmptyMessage = styled.div`
+  font-size: 32px;
+  color: #6b7280;
+  text-align: center;
+  padding: 24px;
 `;
 
 const ErrorText = styled.p`
