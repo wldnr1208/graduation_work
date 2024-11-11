@@ -5,6 +5,17 @@ import { db } from "../../api/firebase";
 import { useParams } from "react-router-dom";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import styled from "styled-components";
+import backgroundImg from "../../assets/ActionDetail/auction_background.png";
+import titleImg1 from "../../assets/ActionDetail/nuget_title.png";
+import titleImg2 from "../../assets/ActionDetail/natali_title.png";
+import titleImg3 from "../../assets/ActionDetail/cadibi_title.png";
+import titleImg4 from "../../assets/ActionDetail/ian_title.png";
+import titleImg5 from "../../assets/ActionDetail/tissue_title.png";
+import detailImg1 from "../../assets/ActionDetail/nuget.png";
+import detailImg2 from "../../assets/ActionDetail/natali.png";
+import detailImg3 from "../../assets/ActionDetail/cadibi.png";
+import detailImg4 from "../../assets/ActionDetail/ian.png";
+import detailImg5 from "../../assets/ActionDetail/tissue.png";
 
 const CardDetail = () => {
   const { cardId } = useParams(); // useParams로 cardId 가져오기
@@ -12,6 +23,15 @@ const CardDetail = () => {
   const [amount, setAmount] = useState("");
   const [bids, setBids] = useState([]); // 입찰 데이터 상태
   const addBidMutation = useAddBid(cardId);
+
+  // 카드 ID에 따른 이미지 매핑
+  const imageMapping = {
+    cardId1: { titleImage: titleImg1, detailImage: detailImg1 },
+    cardId2: { titleImage: titleImg2, detailImage: detailImg2 },
+    cardId3: { titleImage: titleImg3, detailImage: detailImg3 },
+    cardId4: { titleImage: titleImg4, detailImage: detailImg4 },
+    cardId5: { titleImage: titleImg5, detailImage: detailImg5 },
+  };
 
   // Firestore에서 입찰 데이터 가져오기 함수
   const fetchBidData = useCallback(async () => {
@@ -54,7 +74,7 @@ const CardDetail = () => {
 
     // Firestore에 추가할 입찰 데이터 구성
     const bid = {
-      amount: Number(amount), // 금액을 숫자로 변환
+      amount: amount, // 금액을 숫자로 변환
       bidder: nickname,
     };
 
@@ -74,48 +94,89 @@ const CardDetail = () => {
 
   return (
     <Container>
-      <Form onSubmit={handleBidSubmit}>
-        <Input
-          type="text"
-          value={nickname}
-          onChange={(e) => setNickname(e.target.value)}
-          placeholder="닉네임"
-          required
-        />
-        <Input
-          type="number"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-          placeholder="입찰 금액"
-          required
-        />
-        <Button type="submit" disabled={addBidMutation.isLoading}>
-          입찰하기
-        </Button>
-      </Form>
-
-      {addBidMutation.isError && (
-        <ErrorText>오류가 발생했습니다. 다시 시도해주세요.</ErrorText>
-      )}
-      {addBidMutation.isSuccess && (
-        <SuccessText>입찰이 성공적으로 등록되었습니다!</SuccessText>
-      )}
-
-      <BidList>
-        {bids.map((bid, index) => (
-          <BidItem key={index}>
-            <strong>{bid.bidder}</strong>: {bid.amount}원
-          </BidItem>
-        ))}
-      </BidList>
+      {/* 카드 ID에 맞는 타이틀 이미지와 상세 이미지 렌더링 */}
+      {imageMapping[cardId] && (
+        <Contain>
+          <TitleImage src={imageMapping[cardId].titleImage} alt="Title" />
+          <DetailImage src={imageMapping[cardId].detailImage} alt="Detail" />
+        </Contain>
+      )}{" "}
+      <ScrollableImageContainer>
+        <Form onSubmit={handleBidSubmit}>
+          <Input
+            type="text"
+            value={nickname}
+            onChange={(e) => setNickname(e.target.value)}
+            placeholder="닉네임"
+            required
+          />
+          <Input
+            type="number"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            placeholder="입찰 금액"
+            required
+          />
+          <Button type="submit" disabled={addBidMutation.isLoading}>
+            입찰하기
+          </Button>
+        </Form>
+        {addBidMutation.isError && (
+          <ErrorText>오류가 발생했습니다. 다시 시도해주세요.</ErrorText>
+        )}
+        {addBidMutation.isSuccess && (
+          <SuccessText>입찰이 성공적으로 등록되었습니다!</SuccessText>
+        )}
+        <BidList>
+          {bids.map((bid, index) => (
+            <BidItem key={index}>
+              <strong>{bid.bidder}</strong>: {bid.amount}원
+            </BidItem>
+          ))}
+        </BidList>{" "}
+      </ScrollableImageContainer>
     </Container>
   );
 };
 
 export default CardDetail;
 
+const Contain = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+`;
+
 const Container = styled.div`
-  padding: 20px;
+  width: 100%; /* 네비게이션 바의 고정 너비 */
+  height: 1204px; /* 부모 컨테이너 높이 전부 차지 */
+  background-image: url(${backgroundImg}); /* 배경 이미지 설정 */
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  object-fit: contain;
+  display: flex;
+  flex-shrink: 0;
+`;
+const ScrollableImageContainer = styled.div`
+  max-height: 100vh; /* 이미지가 부모 높이를 넘어갈 때 세로 스크롤 활성화 */
+  overflow-y: scroll; /* 세로 스크롤 활성화 */
+  -ms-overflow-style: none; /* Internet Explorer와 Edge에서 스크롤바 숨기기 */
+  scrollbar-width: none; /* Firefox에서 스크롤바 숨기기 */
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera에서 스크롤바 숨기기 */
+  }
+`;
+
+const TitleImage = styled.img`
+  width: auto;
+  height: 80px;
+  margin-bottom: 40px;
+`;
+
+const DetailImage = styled.img`
+  width: 505px;
+  height: 505px;
 `;
 
 const Form = styled.form`
@@ -145,16 +206,6 @@ const Button = styled.button`
   }
 `;
 
-const ErrorText = styled.p`
-  color: red;
-  margin-top: 10px;
-`;
-
-const SuccessText = styled.p`
-  color: green;
-  margin-top: 10px;
-`;
-
 const BidList = styled.ul`
   margin-top: 20px;
   list-style-type: none;
@@ -164,4 +215,14 @@ const BidList = styled.ul`
 const BidItem = styled.li`
   font-size: 16px;
   margin-bottom: 8px;
+`;
+
+const ErrorText = styled.p`
+  color: red;
+  margin-top: 10px;
+`;
+
+const SuccessText = styled.p`
+  color: green;
+  margin-top: 10px;
 `;
