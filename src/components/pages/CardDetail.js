@@ -1,4 +1,4 @@
-// src/components/CardDetail.js
+//AcutionDetail페이지
 import React, { useState, useEffect, useCallback } from "react";
 import { useAddBid } from "../../hooks/useBids";
 import { db } from "../../api/firebase";
@@ -94,6 +94,15 @@ const CardDetail = () => {
   };
   const sortedBids = bids.slice().sort((a, b) => b.amount - a.amount);
 
+  // 원화 포맷팅 함수 추가
+  const formatKRW = (amount) => {
+    return (
+      new Intl.NumberFormat("ko-KR", {
+        maximumFractionDigits: 0,
+      }).format(amount) + " ₩"
+    ); // '원' 으로 변경하거나 'won' 또는 '₩' 사용 가능
+  };
+
   return (
     <Container>
       {/* 카드 ID에 맞는 타이틀 이미지와 상세 이미지 렌더링 */}
@@ -153,9 +162,7 @@ const CardDetail = () => {
                 <EmptyMessage>아직 입찰 내역이 없습니다.</EmptyMessage>
               ) : (
                 sortedBids.map((bid, index) => {
-                  const formattedAmount = `${
-                    bid?.amount?.toLocaleString() || 0
-                  } ₩`;
+                  const formattedAmount = formatKRW(bid?.amount || 0);
                   return (
                     <BidCard key={index} rank={index}>
                       <CardContent>
@@ -262,8 +269,8 @@ const ScrollableImageContainer = styled.div`
 `;
 
 const TitleImage = styled.img`
-  width: auto;
-  height: 77px;
+  width: 673px;
+  height: 79px;
   margin-bottom: 70px;
 `;
 
@@ -365,6 +372,7 @@ const CardContent = styled.div`
   padding-bottom: 35px;
 `;
 
+//입찰자 리스트 색상
 const BidderName = styled.div`
   width: 500px;
   font-weight: bold;

@@ -1,16 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import backgroundImg from "../../assets/collection/starbackground.png";
 import Card from "./Card";
 import { useQuery } from "react-query";
 import cardData from "../../data/data";
+import Popup from "../PopUp";
+import collectionDetailData from "../../data/collectionDetailData";
 
 const Collection = () => {
   const { data: cards = [], isLoading } = useQuery("cards", () => cardData);
+  const [selectedCard, setSelectedCard] = useState(null);
 
   if (isLoading) {
     return <p>Loading...</p>;
   }
+
+  const handleCardClick = (card) => {
+    // collectionDetailData에서 클릭한 카드의 id와 일치하는 데이터를 찾음
+    const matchedCard = collectionDetailData.find(
+      (item) => item.id === card.id
+    );
+    if (matchedCard) {
+      setSelectedCard(matchedCard); // 매칭된 데이터를 팝업에 표시하기 위해 설정
+    }
+  };
+
+  const handleClosePopup = () => {
+    setSelectedCard(null);
+  };
 
   return (
     <Container>
@@ -21,10 +38,12 @@ const Collection = () => {
               key={card.id}
               image={card.image}
               hoverImage={card.hoverImage}
+              onClick={() => handleCardClick(card)}
             />
           ))}
         </CardContainer>
       </ScrollableImageContainer>
+      {selectedCard && <Popup card={selectedCard} onClose={handleClosePopup} />}
     </Container>
   );
 };
@@ -52,6 +71,11 @@ const ScrollableImageContainer = styled.div`
   background-position: center;
   display: flex;
   justify-content: center;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const CardContainer = styled.div`
