@@ -31,7 +31,7 @@ const Popup = ({ card, onClose }) => {
               </DetailItem>
               <DetailItem>
                 <Label>가격 변동</Label>
-                <Value>{card.changeCost}</Value>
+                <RedValue>{card.changeCost}</RedValue>
               </DetailItem>{" "}
               <DetailItem></DetailItem>
               <HistoryBox>
@@ -253,7 +253,25 @@ const Value = styled.span`
   line-height: 121.7%; /* 38.007px */
   letter-spacing: -2.46px;
 `;
-
+const RedValue = styled.span`
+  @font-face {
+    font-family: "Helvetica-Condensed";
+    src: url("/fonts/Helvetica-Condensed.woff2") format("woff2");
+    font-weight: bold;
+    font-style: normal;
+  }
+  padding-right: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  color: red;
+  padding-left: 36px;
+  text-align: right;
+  font-size: 41px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 121.7%; /* 38.007px */
+  letter-spacing: -2.46px;
+`;
 const HistoryBox = styled.p`
   display: flex;
   font-size: 14px;

@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useAddBid } from "../../hooks/useBids";
 import { db } from "../../api/firebase";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import styled from "styled-components";
 import backgroundImg from "../../assets/ActionDetail/auction_background.png";
@@ -17,13 +17,14 @@ import detailImg3 from "../../assets/ActionDetail/cadibi.png";
 import detailImg4 from "../../assets/ActionDetail/ian.png";
 import detailImg5 from "../../assets/ActionDetail/tissue.png";
 import auctionButtonImg from "../../assets/ActionDetail/auction_button.png";
-
+import closeIcon from "../../assets/common/close.png"; // 닫기 버튼 아이콘 경로 추가
 const CardDetail = () => {
   const { cardId } = useParams(); // useParams로 cardId 가져오기
   const [nickname, setNickname] = useState("");
   const [amount, setAmount] = useState("");
   const [bids, setBids] = useState([]); // 입찰 데이터 상태
   const addBidMutation = useAddBid(cardId);
+  const navigate = useNavigate(); // useNavigate 훅 사용
 
   // 카드 ID에 따른 이미지 매핑
   const imageMapping = {
@@ -102,9 +103,12 @@ const CardDetail = () => {
       }).format(amount) + " ₩"
     ); // '원' 으로 변경하거나 'won' 또는 '₩' 사용 가능
   };
-
+  const handleClose = () => {
+    navigate("/Auction"); // '/Auction' 경로로 이동
+  };
   return (
     <Container>
+      <CloseButton onClick={handleClose} /> {/* 닫기 버튼 추가 */}
       {/* 카드 ID에 맞는 타이틀 이미지와 상세 이미지 렌더링 */}
       {imageMapping[cardId] && (
         <Contain>
@@ -184,6 +188,18 @@ const CardDetail = () => {
 };
 
 export default CardDetail;
+const CloseButton = styled.button`
+  position: absolute;
+  margin-top: 62px;
+  right: 60px;
+  width: 80px;
+  height: 80px;
+  background: url(${closeIcon}) no-repeat center center;
+  background-size: cover;
+  border: none;
+  cursor: pointer;
+  z-index: 100;
+`;
 
 const Name = styled.div`
   width: 410px;
@@ -349,13 +365,14 @@ const HeaderRow = styled.div`
 `;
 
 const HeaderTitle = styled.div`
-  height: 88px;
+  height: 60px;
   font-size: 32px;
   font-weight: bold;
-  color: #000000;
+  color: #646464;
   display: flex;
   text-align: left;
   align-items: center;
+  font-weight: 800;
 `;
 
 const CardGrid = styled.div`

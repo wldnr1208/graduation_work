@@ -1,11 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import backgroundImg from "../../assets/main/about_background.png";
-import aboutImage from "../../assets/main/about_latter_974_980_have.png"; // 위에 추가할 이미지 파일 import
+import aboutImage from "../../assets/main/about_latter_974_980_have.png";
+import fireWork from "../../assets/main/firework.gif"; // GIF 파일 import
 
 const About = () => {
   return (
     <Container>
+      <Firework1 src={fireWork} alt="Firework" /> {/* Firework 컴포넌트 추가 */}{" "}
+      <Firework2 src={fireWork} alt="Firework" /> {/* Firework 컴포넌트 추가 */}
       <ScrollableImageContainer>
         <AboutImage src={aboutImage} alt="AboutImage" />
       </ScrollableImageContainer>
@@ -27,6 +30,24 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   flex-shrink: 0;
+  position: relative; /* Firework의 위치 설정을 위해 relative 사용 */
+`;
+
+const Firework1 = styled.img`
+  width: 582px; /* GIF의 크기 설정 */
+  height: 702px;
+  position: absolute; /* 원하는 위치로 배치 */
+  top: 266px; /* 컨테이너의 위쪽에서 50px 떨어짐 */
+  right: 160px; /* 컨테이너의 오른쪽에서 50px 떨어짐 */
+  z-index: 10; /* 다른 요소 위에 표시되도록 z-index 설정 */
+`;
+const Firework2 = styled.img`
+  width: 520px; /* GIF의 크기 설정 */
+  height: 624px;
+  position: absolute; /* 원하는 위치로 배치 */
+  top: 586px; /* 컨테이너의 위쪽에서 50px 떨어짐 */
+  right: 1575px; /* 컨테이너의 오른쪽에서 50px 떨어짐 */
+  z-index: 10; /* 다른 요소 위에 표시되도록 z-index 설정 */
 `;
 
 const ScrollableImageContainer = styled.div`
