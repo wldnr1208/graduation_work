@@ -1,9 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import backgroundImg from "../../assets/fame/5fame_background_full.png";
+import crown from "../../assets/fame/moving crown.gif";
 
 const Fame = () => {
-  return <Container></Container>;
+  return (
+    <Container>
+      <RightCrown src={crown} alt="crown" />
+      <LeftCrown src={crown} alt="crown" />
+    </Container>
+  );
 };
 
 export default Fame;
@@ -21,4 +27,21 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   flex-shrink: 0;
+`;
+
+const RightCrown = styled.img`
+  width: 272px;
+  height: 272px;
+  position: absolute;
+  top: 135px;
+  right: 500px;
+  z-index: 10;
+`;
+const LeftCrown = styled.img`
+  width: 272px;
+  height: 272px;
+  position: absolute;
+  top: 130px;
+  right: 1360px;
+  z-index: 10;
 `;

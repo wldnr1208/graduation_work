@@ -2,13 +2,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-const Card = ({ image, hoverImage }) => {
+const Card = ({ image, hoverImage, onClick }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <CardImage
       src={isHovered ? hoverImage : image}
       alt="Card Image"
+      onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     />
@@ -21,5 +22,6 @@ const CardImage = styled.img`
   width: 511.6px;
   height: 500px;
   padding: 10px;
-  border: 2px dashed black;
+  border-bottom: 2px dashed black;
+  border-right: 2px dashed black;
 `;

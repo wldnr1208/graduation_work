@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import introImage from "../assets/intro/introImage.png";
 import gifAnimation from "../assets/intro/gifAnimation.gif";
-import enterImage from "../assets/intro/enterImage.png";
-// import background from "../assets/intro/background.png";
+import enterImage from "../assets/intro/background_title.png";
+import enterButton from "../assets/intro/button_ENTER.png";
 
 const ImageClickFlow = ({ onEnter }) => {
   const [isGifPlaying, setIsGifPlaying] = useState(false);
@@ -34,9 +34,11 @@ const ImageClickFlow = ({ onEnter }) => {
 
   return (
     <Container $isGifPlaying={isGifPlaying}>
-      {/* Transient prop 사용 */}
       {showEnterScreen ? (
-        <StyledImage src={enterImage} alt="Enter" />
+        <>
+          <StyledImage src={enterImage} alt="Enter" />
+          <ButtonImage src={enterButton} alt="Enter Button" onClick={onEnter} />
+        </>
       ) : isGifPlaying ? (
         <StyledImage src={gifAnimation} alt="Animation" />
       ) : (
@@ -60,10 +62,22 @@ const Container = styled.div`
   background-size: 100% calc(100vh - 104px);
   background-position: center;
   background-repeat: no-repeat;
+  position: relative;
 `;
 
 const StyledImage = styled.img`
   width: 100%;
   height: 100%;
+  cursor: pointer;
+`;
+
+const ButtonImage = styled.img`
+  position: absolute;
+  /* bottom: 50px; */
+  left: 50%;
+  margin-top: 620px;
+  transform: translateX(-50%);
+  width: 350px;
+  height: auto;
   cursor: pointer;
 `;
