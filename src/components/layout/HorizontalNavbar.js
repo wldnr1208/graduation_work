@@ -97,23 +97,23 @@ const AboutButtonImage = styled.img`
   width: 163px;
   height: 76px;
   cursor: pointer;
-  padding-left: 32px;
+  padding-left: 42px;
 `;
 
 const CollectionButtonImage = styled.img`
   width: 222px;
   height: 76px;
   cursor: pointer;
-  padding-left: 32px;
+  padding-left: 42px;
 `;
 
 const AuctionButtonImage = styled.img`
   width: 343px;
   height: 76px;
   cursor: pointer;
-  margin-left: 32px; /* 30px의 간격을 두어 오른쪽 라인이 밀려나도록 설정 */
+  margin-left: 40px; /* 30px의 간격을 두어 오른쪽 라인이 밀려나도록 설정 */
   padding-left: 0; /* padding-left를 제거하여 여백 조정 */
-  padding-right: 32px;
+  padding-right: 42px;
 `;
 
 const Container = styled.div`
@@ -125,17 +125,17 @@ const Container = styled.div`
 `;
 
 const ValueButtonImage = styled.img`
-  width: 764px;
+  width: 690px;
   height: 76px;
   cursor: pointer;
-  padding-left: 32px;
+  padding-left: 42px;
 `;
 
 const FlameButtonImage = styled.img`
   width: 194px;
   height: 76px;
   cursor: pointer;
-  padding-left: 32px;
+  padding-left: 42px;
 `;
 
 const ManImage = styled.img`

@@ -101,10 +101,10 @@ const Title = styled.p`
   font-family: "Helvetica-Condensed", sans-serif;
   font-size: 35px;
   font-weight: bold;
-  margin: 0 auto;
+  /* margin: 0 auto; */
   color: #000;
-  padding-top: 48px;
-  padding-bottom: 25px;
+  padding-left: 40px;
+  /* padding-bottom: 25px; */
   text-transform: uppercase;
 `;
 
@@ -118,13 +118,13 @@ const SubTitle = styled.p`
   width: 100%;
   max-width: 660px;
   height: auto;
-  margin: 0 auto;
   font-family: "esamanru OTF";
   font-size: 34px;
   font-style: normal;
   font-weight: 300;
-  padding-bottom: 66px;
-  line-height: 92.7%; /* 31.518px */
+  padding-bottom: 35px;
+  padding-left: 40px;
+  line-height: 92.7%;
 `;
 
 const Content = styled.div`
