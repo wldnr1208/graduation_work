@@ -283,8 +283,8 @@ const HistoryBox = styled.p`
 const Description = styled.p`
   @font-face {
     font-family: "esamanrud";
-    src: url("/fonts/esamanru OTF Light");
-    font-weight: Light;
+    src: url("/fonts/esamanru OTF bold");
+    font-weight: bold;
     font-style: normal;
   }
   width: 486px;
@@ -292,7 +292,7 @@ const Description = styled.p`
   color: #000;
   font-size: 24px;
   font-style: normal;
-  font-weight: 300;
+  font-weight: 700;
   line-height: 166%;
   padding-left: 36px;
 `;
