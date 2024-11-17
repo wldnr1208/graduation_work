@@ -99,7 +99,7 @@ const Title = styled.p`
   max-width: 660px;
   height: 42px;
   font-family: "Helvetica-Condensed", sans-serif;
-  font-size: 35px;
+  font-size: 32px;
   font-weight: bold;
   /* margin: 0 auto; */
   color: #000;
@@ -119,7 +119,7 @@ const SubTitle = styled.p`
   max-width: 660px;
   height: auto;
   font-family: "esamanru OTF";
-  font-size: 34px;
+  font-size: 32px;
   font-style: normal;
   font-weight: 300;
   padding-bottom: 35px;
@@ -277,7 +277,7 @@ const HistoryBox = styled.p`
   font-size: 14px;
   line-height: 1.5;
   color: #333;
-  margin-top: 20px;
+  margin-top: -25px;
 `;
 
 const Description = styled.p`
