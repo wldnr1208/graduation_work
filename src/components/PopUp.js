@@ -71,6 +71,7 @@ const PopupContainer = styled.div`
   width: 860px;
   height: 1006px;
   overflow-y: auto; /* 세로 스크롤 활성화 */
+  border: 4px solid #000;
   position: relative;
 `;
 
@@ -78,33 +79,35 @@ const CloseButton = styled.button`
   position: absolute;
   top: 10px;
   right: 10px;
-  margin-top: 20px;
-  margin-right: 20px;
-
+  margin: 20px;
   width: 44px;
   height: 44px;
+
   border: none;
   background: url(${close}) no-repeat center center;
   background-size: contain;
   cursor: pointer;
 `;
 
-const CardContent = styled.div``;
+const CardContent = styled.div`
+  margin: 0 auto;
+`;
 
 const Title = styled.p`
   @font-face {
     font-family: "Helvetica-Condensed"; /* 폰트 이름 정의 */
-    src: url("/fonts/Helvetica-Condensed-Bold.ttf") format("truetype"); /* TTF 파일 경로 및 형식 */
+    src: url("/fonts/Helvetica-Condensed-Bold.otf") format("opentype"); /* TTF 파일 경로 및 형식 */
     font-weight: 700; /* Bold 폰트 */
     font-style: normal;
   }
-  max-width: 649px;
   height: 42px;
   color: #000;
   font-family: "Helvetica-Condensed", sans-serif; /* 폰트 적용 */
-  font-size: 40px;
-  padding-left: 40px;
+  font-size: 45px;
+  padding-left: 52px;
+  padding-top: 52px;
   font-style: normal;
+  margin: 0 auto;
   font-weight: 700; /* Bold 폰트 */
   line-height: 92.7%; /* 41.715px */
   letter-spacing: -2.7px; /* 자간 조정 */
@@ -119,14 +122,13 @@ const SubTitle = styled.p`
     font-style: normal;
   }
   width: 100%;
-  max-width: 660px;
-  height: auto;
   font-family: "Esamanru-Light", sans-serif; /* 위에서 정의한 폰트 이름 사용 */
   font-size: 34px;
   font-style: normal;
   font-weight: 300; /* Light 폰트 스타일 */
   padding-bottom: 35px;
-  padding-left: 40px;
+  padding-left: 52px;
+  margin-top: 21px;
   line-height: 92.7%;
 `;
 
@@ -165,7 +167,7 @@ const BidderImage = styled.img`
 const BidderName = styled.p`
   @font-face {
     font-family: "Helvetica-Condensed"; /* 폰트 이름 정의 */
-    src: url("/fonts/Helvetica-Condensed-Bold.ttf") format("truetype"); /* TTF 파일 경로 및 형식 */
+    src: url("/fonts/Helvetica-Condensed-Bold.otf") format("opentype"); /* TTF 파일 경로 및 형식 */
     font-weight: 700; /* Bold 폰트 */
     font-style: normal;
   }
@@ -204,14 +206,14 @@ const StyleP = styled.p`
   letter-spacing: -6px; /* 자간 조정 */
   color: #000; /* 색상 */
   margin: 0 auto; /* 중앙 정렬 */
-  padding-left: 17px;
+  margin-left: -23px;
   text-shadow: 0px 0px 19.8px #fffb00;
 `;
 
 const BestCost = styled.p`
   @font-face {
     font-family: "Helvetica-Condensed"; /* 폰트 이름 정의 */
-    src: url("/fonts/Helvetica-Condensed-Bold.ttf") format("truetype"); /* TTF 파일 경로 및 형식 */
+    src: url("/fonts/Helvetica-Condensed-Bold.otf") format("opentype"); /* TTF 파일 경로 및 형식 */
     font-weight: 700; /* Bold 폰트 */
     font-style: normal;
   }
@@ -264,7 +266,7 @@ const Label = styled.span`
 const Value = styled.span`
   @font-face {
     font-family: "Helvetica-Condensed"; /* 폰트 이름 정의 */
-    src: url("/fonts/Helvetica-Condensed-Bold.ttf") format("truetype"); /* TTF 파일 경로 및 형식 */
+    src: url("/fonts/Helvetica-Condensed-Bold.otf") format("opentype"); /* TTF 파일 경로 및 형식 */
     font-weight: 700; /* Bold 폰트 */
     font-style: normal;
   }
@@ -285,7 +287,7 @@ const Value = styled.span`
 const RedValue = styled.span`
   @font-face {
     font-family: "Helvetica-Condensed"; /* 폰트 이름 정의 */
-    src: url("/fonts/Helvetica-Condensed-Bold.ttf") format("truetype"); /* TTF 파일 경로 및 형식 */
+    src: url("/fonts/Helvetica-Condensed-Bold.otf") format("opentype"); /* TTF 파일 경로 및 형식 */
     font-weight: 700; /* Bold 폰트 */
     font-style: normal;
   }
