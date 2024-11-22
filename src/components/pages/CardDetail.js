@@ -148,12 +148,6 @@ const CardDetail = () => {
             disabled={addBidMutation.isLoading}
           />
         </Form>
-        {addBidMutation.isError && (
-          <ErrorText>오류가 발생했습니다. 다시 시도해주세요.</ErrorText>
-        )}
-        {addBidMutation.isSuccess && (
-          <SuccessText>입찰이 성공적으로 등록되었습니다!</SuccessText>
-        )}
         <BidderTitle>입찰자 리스트</BidderTitle>
         <ListContain>
           <WhiteBackground>
@@ -235,6 +229,7 @@ const ListContain = styled.div`
   flex-direction: column;
   border-radius: 13.333px;
   border: 4px solid #000;
+  margin-bottom: 100px;
 `;
 const UserContain = styled.div`
   display: flex;
@@ -291,7 +286,8 @@ const ScrollableImageContainer = styled.div`
 const TitleImage = styled.img`
   width: 673px;
   height: 79px;
-  margin-bottom: 70px;
+  margin-bottom: 53px;
+  margin-top: 13px;
 `;
 
 const DetailImage = styled.img`
@@ -411,6 +407,11 @@ const BidAmount = styled.div`
   width: 500px;
   font-weight: bold;
   font-size: 32px;
+  max-width: 500px; /* 최대 너비를 설정 */
+  overflow: hidden; /* 넘치는 내용 숨기기 */
+  text-overflow: ellipsis; /* 넘치는 텍스트를 '...'으로 표시 */
+  white-space: nowrap; /* 텍스트가 줄바꿈되지 않도록 설정 */
+
   ${({ rank }) => {
     if (rank === 0)
       return "color: #F00; text-align: center; font-size: 40px; font-style: normal; font-weight: bold;";
@@ -425,14 +426,4 @@ const EmptyMessage = styled.div`
   color: #6b7280;
   text-align: center;
   padding: 24px;
-`;
-
-const ErrorText = styled.p`
-  color: red;
-  margin-top: 10px;
-`;
-
-const SuccessText = styled.p`
-  color: green;
-  margin-top: 10px;
 `;

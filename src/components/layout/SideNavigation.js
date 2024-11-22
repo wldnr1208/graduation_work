@@ -110,7 +110,7 @@ const ReFreshButtonImage = styled.img`
   display: flex;
   width: 235px;
   height: 62px;
-  margin-top: 875px;
+  margin-top: 913px;
   margin-bottom: 85px;
 `;
 
@@ -129,12 +129,12 @@ const ButtonImage = styled.img`
 `;
 
 const Image = styled.img`
-  width: 972px;
-  height: 1428px;
+  width: 872px;
+  height: 1345px;
   cursor: pointer;
-  border: 4px solid #000; /* 기본 보더 설정 */
-  border-left: none; /* 왼쪽 보더 제거 */
-  margin-top: 2px;
+  border: 4px solid #000;
+  border-left: none;
+  margin-top: 46px;
 `;
 
 const ModalOverlay = styled.div`
@@ -149,16 +149,15 @@ const ModalOverlay = styled.div`
 `;
 
 const ModalContent = styled.div`
-  background-color: white;
-  width: 972px;
+  width: 872px;
   height: 1428px;
-  margin-left: -750px;
+  margin-left: -854px;
   position: relative;
 `;
 
 const CloseButton = styled.button`
   position: absolute;
-  top: 10px;
+  top: 55px;
   right: 10px;
   margin-top: 20px;
   margin-right: 20px;
