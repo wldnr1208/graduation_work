@@ -110,7 +110,7 @@ const ReFreshButtonImage = styled.img`
   display: flex;
   width: 235px;
   height: 62px;
-  margin-top: 875px;
+  margin-top: 913px;
   margin-bottom: 85px;
 `;
 

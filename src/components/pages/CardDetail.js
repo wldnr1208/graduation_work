@@ -229,6 +229,7 @@ const ListContain = styled.div`
   flex-direction: column;
   border-radius: 13.333px;
   border: 4px solid #000;
+  margin-bottom: 100px;
 `;
 const UserContain = styled.div`
   display: flex;
@@ -285,7 +286,8 @@ const ScrollableImageContainer = styled.div`
 const TitleImage = styled.img`
   width: 673px;
   height: 79px;
-  margin-bottom: 70px;
+  margin-bottom: 53px;
+  margin-top: 13px;
 `;
 
 const DetailImage = styled.img`
