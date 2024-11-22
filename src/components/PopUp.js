@@ -17,7 +17,10 @@ const Popup = ({ card, onClose }) => {
             <ImageWrapper>
               <Image src={card.image} alt={card.title} />
             </ImageWrapper>
-            <BestCost>{card.bestCost}</BestCost>
+            <BildDiv>
+              <BestCost>{card.bestCost}</BestCost>
+              <StyleP>(최고입찰가)</StyleP>
+            </BildDiv>
 
             <Details>
               <BidderWrapper>
@@ -90,38 +93,38 @@ const CardContent = styled.div``;
 
 const Title = styled.p`
   @font-face {
-    font-family: "Helvetica-Condensed";
-    src: url("/fonts/Helvetica-Condensed.woff2") format("woff2");
-    font-weight: bold;
+    font-family: "Helvetica-Condensed"; /* 폰트 이름 정의 */
+    src: url("/fonts/Helvetica-Condensed-Bold.ttf") format("truetype"); /* TTF 파일 경로 및 형식 */
+    font-weight: 700; /* Bold 폰트 */
     font-style: normal;
   }
-  width: 100%;
-  max-width: 660px;
+  max-width: 649px;
   height: 42px;
-  font-family: "Helvetica-Condensed", sans-serif;
-  font-size: 32px;
-  font-weight: bold;
-  /* margin: 0 auto; */
   color: #000;
+  font-family: "Helvetica-Condensed", sans-serif; /* 폰트 적용 */
+  font-size: 40px;
   padding-left: 40px;
-  /* padding-bottom: 25px; */
-  text-transform: uppercase;
+  font-style: normal;
+  font-weight: 700; /* Bold 폰트 */
+  line-height: 92.7%; /* 41.715px */
+  letter-spacing: -2.7px; /* 자간 조정 */
+  text-transform: uppercase; /* 대문자 변환 */
 `;
 
 const SubTitle = styled.p`
   @font-face {
-    font-family: "Helvetica-Condensed";
-    src: url("/fonts/esamanru OTF Light");
-    font-weight: bold;
+    font-family: "Esamanru-Light"; /* 폰트 이름 정의 */
+    src: url("/fonts/esamanru-OTF-Light.otf") format("opentype"); /* 폰트 파일 경로 및 형식 */
+    font-weight: 300; /* Light 폰트는 일반적으로 300 */
     font-style: normal;
   }
   width: 100%;
   max-width: 660px;
   height: auto;
-  font-family: "esamanru OTF";
-  font-size: 32px;
+  font-family: "Esamanru-Light", sans-serif; /* 위에서 정의한 폰트 이름 사용 */
+  font-size: 34px;
   font-style: normal;
-  font-weight: 300;
+  font-weight: 300; /* Light 폰트 스타일 */
   padding-bottom: 35px;
   padding-left: 40px;
   line-height: 92.7%;
@@ -161,15 +164,16 @@ const BidderImage = styled.img`
 
 const BidderName = styled.p`
   @font-face {
-    font-family: "Helvetica-Condensed";
-    src: url("/fonts/Helvetica-Condensed.woff2") format("woff2");
-    font-weight: bold;
+    font-family: "Helvetica-Condensed"; /* 폰트 이름 정의 */
+    src: url("/fonts/Helvetica-Condensed-Bold.ttf") format("truetype"); /* TTF 파일 경로 및 형식 */
+    font-weight: 700; /* Bold 폰트 */
     font-style: normal;
   }
   padding-right: 12px;
   font-size: 18px;
   font-weight: bold;
   color: #333;
+  font-family: "Helvetica-Condensed", sans-serif; /* 폰트 적용 */
   padding-left: 36px;
   color: #000;
   text-align: right;
@@ -180,17 +184,41 @@ const BidderName = styled.p`
   letter-spacing: -2.46px;
 `;
 
+const BildDiv = styled.div`
+  display: flex;
+  width: 600px;
+  margin: 0 auto;
+`;
+
+const StyleP = styled.p`
+  @font-face {
+    font-family: "Pretendard-Bold"; /* 폰트 이름 정의 */
+    src: url("/fonts/Pretendard-Bold.otf") format("opentype"); /* OTF 파일 경로 및 형식 */
+    font-weight: 700; /* Bold 폰트 */
+    font-style: normal;
+  }
+  font-family: "Pretendard-Bold", sans-serif; /* 폰트 적용 */
+  font-size: 56px; /* 폰트 크기 */
+  font-weight: 700; /* Bold */
+  line-height: 1.2; /* 원하는 비율에 맞게 조정 (ex: 1.2는 67.2px) */
+  letter-spacing: -6px; /* 자간 조정 */
+  color: #000; /* 색상 */
+  margin: 0 auto; /* 중앙 정렬 */
+  padding-left: 17px;
+  text-shadow: 0px 0px 19.8px #fffb00;
+`;
+
 const BestCost = styled.p`
   @font-face {
-    font-family: "Helvetica-Condensed";
-    src: url("/fonts/Helvetica-Condensed.woff2") format("woff2");
-    font-weight: bold;
+    font-family: "Helvetica-Condensed"; /* 폰트 이름 정의 */
+    src: url("/fonts/Helvetica-Condensed-Bold.ttf") format("truetype"); /* TTF 파일 경로 및 형식 */
+    font-weight: 700; /* Bold 폰트 */
     font-style: normal;
   }
   padding-bottom: 74px;
-  width: 700px;
   margin: 0 auto;
   color: #000;
+  font-family: "Helvetica-Condensed", sans-serif; /* 폰트 적용 */
   text-shadow: 0px 0px 19.8px #fffb00;
   font-size: 74px;
   font-style: normal;
@@ -211,9 +239,9 @@ const DetailItem = styled.div`
 
 const Label = styled.span`
   @font-face {
-    font-family: "Pretendard";
-    src: url("/fonts/Pretendard-Bold");
-    font-weight: bold;
+    font-family: "Pretendard-Bold"; /* 폰트 이름 정의 */
+    src: url("/fonts/Pretendard-Bold.otf") format("opentype"); /* OTF 파일 경로 및 형식 */
+    font-weight: 700; /* Bold 폰트 */
     font-style: normal;
   }
   display: flex;
@@ -226,18 +254,18 @@ const Label = styled.span`
   box-shadow: 0px 0px 4.647px 0px #000;
   color: #000;
   text-align: center;
-  font-family: Pretendard;
   font-size: 29px;
   font-style: normal;
   font-weight: 700;
+  font-family: "Pretendard-Bold", sans-serif; /* 폰트 적용 */
   line-height: 92.7%;
 `;
 
 const Value = styled.span`
   @font-face {
-    font-family: "Helvetica-Condensed";
-    src: url("/fonts/Helvetica-Condensed.woff2") format("woff2");
-    font-weight: bold;
+    font-family: "Helvetica-Condensed"; /* 폰트 이름 정의 */
+    src: url("/fonts/Helvetica-Condensed-Bold.ttf") format("truetype"); /* TTF 파일 경로 및 형식 */
+    font-weight: 700; /* Bold 폰트 */
     font-style: normal;
   }
   padding-right: 12px;
@@ -248,6 +276,7 @@ const Value = styled.span`
   color: #000;
   text-align: right;
   font-size: 41px;
+  font-family: "Helvetica-Condensed", sans-serif; /* 폰트 적용 */
   font-style: normal;
   font-weight: 700;
   line-height: 121.7%; /* 38.007px */
@@ -255,9 +284,9 @@ const Value = styled.span`
 `;
 const RedValue = styled.span`
   @font-face {
-    font-family: "Helvetica-Condensed";
-    src: url("/fonts/Helvetica-Condensed.woff2") format("woff2");
-    font-weight: bold;
+    font-family: "Helvetica-Condensed"; /* 폰트 이름 정의 */
+    src: url("/fonts/Helvetica-Condensed-Bold.ttf") format("truetype"); /* TTF 파일 경로 및 형식 */
+    font-weight: 700; /* Bold 폰트 */
     font-style: normal;
   }
   padding-right: 12px;
@@ -267,6 +296,7 @@ const RedValue = styled.span`
   padding-left: 36px;
   text-align: right;
   font-size: 41px;
+  font-family: "Helvetica-Condensed", sans-serif; /* 폰트 적용 */
   font-style: normal;
   font-weight: 700;
   line-height: 121.7%; /* 38.007px */
@@ -282,17 +312,17 @@ const HistoryBox = styled.p`
 
 const Description = styled.p`
   @font-face {
-    font-family: "esamanrud";
-    src: url("/fonts/esamanru OTF bold");
-    font-weight: bold;
+    font-family: "Esamanru-Light"; /* 폰트 이름 정의 */
+    src: url("/fonts/esamanru-OTF-Light.otf") format("opentype"); /* 폰트 파일 경로 및 형식 */
+    font-weight: 300; /* Light 폰트는 일반적으로 300 */
     font-style: normal;
   }
   width: 486px;
   margin-top: 3px;
   color: #000;
+  font-family: "Esamanru-Light", sans-serif; /* 위에서 정의한 폰트 이름 사용 */
   font-size: 24px;
   font-style: normal;
-  font-weight: 700;
   line-height: 166%;
   padding-left: 36px;
 `;
