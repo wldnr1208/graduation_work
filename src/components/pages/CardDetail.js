@@ -262,7 +262,7 @@ const Contain = styled.div`
 `;
 
 const Container = styled.div`
-  width: 2148px; /* 네비게이션 바의 고정 너비 */
+  width: 100%; /* 네비게이션 바의 고정 너비 */
   height: 1204px; /* 부모 컨테이너 높이 전부 차지 */
   background-image: url(${backgroundImg}); /* 배경 이미지 설정 */
   background-size: 100%;
@@ -270,6 +270,10 @@ const Container = styled.div`
   object-fit: contain;
   display: flex;
   flex-shrink: 0;
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera에서 스크롤바 숨기기 */
+  }
 `;
 const ScrollableImageContainer = styled.div`
   padding-top: 225px;
